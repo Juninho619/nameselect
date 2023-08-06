@@ -1,0 +1,5 @@
+-User enters names
+-push names into arrays
+-randomly choose a name from array
+-Use js to change the page html and display the name
+

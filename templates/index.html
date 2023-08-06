@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, width=device-width">
+  <link href="/static/styles.css" rel="stylesheet">
+  <title>Name Selector</title>
+</head>
+
+<header>
+  <h1>Name Selector</h1>
+</header>
+
+<body>
+  <form>
+    <label for="numFields">Nombre de noms souhaité</label>
+    <input type="number" id="numFields" name="numFields">
+    <button type="button" onclick="createFields()">OK</button>
+  </form>
+  <div id="textFields"></div>
+  <p id="nameplaceholder"></p>
+
+
+  <script>
+    function createFields() {
+      var numFields = document.getElementById("numFields").value;
+      var textFields = document.getElementById("textFields");
+      for (var i = 0; i < numFields; i++) {
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = "textField" + i;
+        input.className = "userInput";
+        textFields.appendChild(input);
+      }
+
+      var selectButton = document.createElement("button");
+      selectButton.type = "button";
+      selectButton.innerHTML = "Choose a name";
+      textFields.appendChild(selectButton);
+      selectButton.addEventListener("click", function(){
+        addToArray();
+        displayName();
+      });
+    }
+
+
+    let myArray = [];
+
+    function addToArray() {
+      let inputs = document.getElementsByClassName("userInput");
+      for (let i = 0; i < inputs.length; i++) {
+        myArray.push(inputs[i].value);
+      }
+      return myArray
+    }
+
+    function displayName() {
+      const listofnames = addToArray();
+      let randomIndex = Math.floor(Math.random() * listofnames.length);
+      let randomName = listofnames[randomIndex];
+      document.getElementById("nameplaceholder").innerHTML = "Welcome to the world, " + randomName + "!";
+    }
+  </script>
+</body>
